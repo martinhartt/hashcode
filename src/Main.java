@@ -42,11 +42,19 @@ public class Main {
 			}
     		
     	});
-    	
+
+        endpoint.setVideosSortedByRequests(allVideos);
     	endpointsToPopularVideos.put(endpoint, allVideos);
 	    
 	  }
 	  return endpointsToPopularVideos;
 	}
 
+    public static Map<Cache, ArrayList<Endpoint>> sortCacheForEachEndpointByLatency(ArrayList<Endpoint> endpoints, ArrayList<Cache> cache) {
+        return new HashMap<>();
+    }
+
+    public static Map<Cache, ArrayList<Endpoint>> sortCacheForEachEndpointByImprovedLatency(ArrayList<Endpoint> endpoints, ArrayList<Cache> cache) {
+        return new HashMap<>();
+    }
 }
