@@ -23,7 +23,7 @@ public class Main {
 
 	
 	public static Map<Endpoint, ArrayList<Video>> sortVideosForEachEndpoint(ArrayList<Endpoint> endpoints, ArrayList<Video> videos) {
-	  Map<Endpoint, ArrayList<Video>> endpointsToPopularVideos = new HashMap<Endpoint, ArrayList<Video>>();
+	  Map<Endpoint, ArrayList<Video>> endpointsToPopularVideos = new HashMap<>();
 	  for (Endpoint endpoint: endpoints) {
 	    ArrayList<Video> allVideos = null;
 	    
@@ -50,11 +50,69 @@ public class Main {
 	  return endpointsToPopularVideos;
 	}
 
-    public static Map<Cache, ArrayList<Endpoint>> sortCacheForEachEndpointByLatency(ArrayList<Endpoint> endpoints, ArrayList<Cache> cache) {
-        return new HashMap<>();
+    public static Map<Endpoint, ArrayList<Cache>> sortCacheForEachEndpointByLatency(ArrayList<Endpoint> endpoints, ArrayList<Cache> cache) {
+        Map<Endpoint, ArrayList<Cache>> endpointsToPopularVideos = new HashMap<>();
+
+        for (Endpoint endpoint: endpoints) {
+            ArrayList<Cache> allCache = null;
+
+            Collections.copy(allCache, cache);
+            Collections.sort(allCache, new Comparator<Cache>() {
+
+                @Override
+                public int compare(Cache c1, Cache c2) {
+                    // TODO Auto-generated method stub
+
+                    int latencyV1 = c1.getLatencyForEndpoints().get(endpoint);
+                    int latencyV2 = c1.getLatencyForEndpoints().get(endpoint);
+
+                    return Integer.compare(latencyV1, latencyV2);
+                }
+
+            });
+
+            endpoint.setCachesSortedByMinimalLatencies(allCache);
+            endpointsToPopularVideos.put(endpoint, allCache);
+
+        }
+
+
+        return endpointsToPopularVideos;
     }
 
-    public static Map<Cache, ArrayList<Endpoint>> sortCacheForEachEndpointByImprovedLatency(ArrayList<Endpoint> endpoints, ArrayList<Cache> cache) {
-        return new HashMap<>();
+    public static Map<Endpoint, ArrayList<Cache>> sortCacheForEachEndpointByImprovedLatency(
+            ArrayList<Endpoint> endpoints,
+            ArrayList<Cache> cache,
+            Map<Endpoint, Integer> dataCenterLatencyForEndpoint
+    ) {
+        Map<Endpoint, ArrayList<Cache>> endpointsToPopularVideos = new HashMap<>();
+
+        for (Endpoint endpoint: endpoints) {
+            ArrayList<Cache> allCache = null;
+
+            int dataCenterLatency = endpoint.getDataCenterLatency();
+
+            Collections.copy(allCache, cache);
+            Collections.sort(allCache, new Comparator<Cache>() {
+
+                @Override
+                public int compare(Cache c1, Cache c2) {
+                    // TODO Auto-generated method stub
+
+                    int latencyV1 = dataCenterLatency - c1.getLatencyForEndpoints().get(endpoint);
+                    int latencyV2 = dataCenterLatency - c1.getLatencyForEndpoints().get(endpoint);
+
+                    return Integer.compare(latencyV1, latencyV2);
+                }
+
+            });
+
+            endpoint.setCachesSortedByMinimalLatencies(allCache);
+            endpointsToPopularVideos.put(endpoint, allCache);
+
+        }
+
+
+        return endpointsToPopularVideos;
     }
 }

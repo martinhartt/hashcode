@@ -13,6 +13,9 @@ public class Endpoint {
 	private Map<Video, Integer> requestsForVideo;
 	private Map<Cache, Integer> latenciesForCache;
 	private ArrayList<Video> videosSortedByRequests;
+    private ArrayList<Cache> cachesSortedByMinimalLatencies; // computated
+    private ArrayList<Cache> cachesSortedByImprovedInLatencies; // computated
+    private int dataCenterLatency;
 
 	public int getId() {
 		return id;
@@ -46,5 +49,29 @@ public class Endpoint {
 
     public void setVideosSortedByRequests(ArrayList<Video> videosSortedByRequests) {
         this.videosSortedByRequests = videosSortedByRequests;
+    }
+
+    public ArrayList<Cache> getCachesSortedByImprovedInLatencies() {
+        return cachesSortedByImprovedInLatencies;
+    }
+
+    public void setCachesSortedByImprovedInLatencies(ArrayList<Cache> cachesSortedByImprovedInLatencies) {
+        this.cachesSortedByImprovedInLatencies = cachesSortedByImprovedInLatencies;
+    }
+
+    public ArrayList<Cache> getCachesSortedByMinimalLatencies() {
+        return cachesSortedByMinimalLatencies;
+    }
+
+    public void setCachesSortedByMinimalLatencies(ArrayList<Cache> cachesSortedByMinimalLatencies) {
+        this.cachesSortedByMinimalLatencies = cachesSortedByMinimalLatencies;
+    }
+
+    public int getDataCenterLatency() {
+        return dataCenterLatency;
+    }
+
+    public void setDataCenterLatency(int dataCenterLatency) {
+        this.dataCenterLatency = dataCenterLatency;
     }
 }
