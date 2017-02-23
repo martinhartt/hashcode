@@ -15,28 +15,52 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-		for(i=0;i<10;i++)
-		{
-			Endpoint a[i]=new Endpoint(i,null);
-		}
-		// TODO Auto-generated method stub
-		System.out.println("Hello world!");
 		Map requestsend = new HashMap();
 		Map requestsendb= new HashMap();
 		Map requestsendc= new HashMap();
-        requestend.put(a[2],924);
-        requestend.put(a[9],837);
-        requestend.put(a[8],167);
-		Video vid=new Video(0,20,requestend);
-        requestendb.put(a[6],988);
-        requestendb.put(a[8],300);
-        requestendb.put(a[7],552);
-        Video vidb=new Video(1,11,requestendb);
-        requestendc.put(a[2],924);
-        requestendc.put(a[9],837);
-        requestendc.put(a[8],167);
-        Video vidc=new Video(2,50,requestend);
-
+        requestend.put(a[0],500);
+        requestend.put(a[1],800);
+        requestend.put(a[2],1000);
+		Video vid=new Video(1,20,requestend);
+        requestendb.put(a[0],600);
+        requestendb.put(a[1],300);
+        requestendb.put(a[2],500);
+        Video vidb=new Video(2,11,requestendb);
+        requestendc.put(a[0],200);
+        requestendc.put(a[1],100);
+        requestendc.put(a[2],500);
+        Video vidc=new Video(3,50,requestendc);
+        
+		
+		Map endvidrequest=new HashMap();
+		endvidrequest.put(1,500);
+		endvidrequest.put(2, 600);
+		endvidrequest.put(3, 200);
+		Map endvidrequestb=new HashMap();
+		endvidrequestb.put(1,800);
+		endvidrequestb.put(2, 300);
+		endvidrequestb.put(3, 100);
+		Map endvidrequestc=new HashMap();
+		endvidrequestc.put(1,1000);
+		endvidrequestc.put(2,10000);
+		endvidrequestc.put(3,500);
+		Map endvidrequestc=new HashMap();
+		
+		for(i=0;i<3;i++)
+		{	if(i==0){
+			Endpoint a[i]=new Endpoint(i,envidrequestend);
+		}
+		else if(i==1){
+			Endpoint a[i]=new Endpoint(i,envidrequestendb);
+		}
+		else if(i==2){
+			Endpoint a[i]=new Endpoint(i,envidrequestendc);
+		}
+			
+		}
+		// TODO Auto-generated method stub
+		
+        
 		ArrayList<Endpoint> endpoints = new ArrayList<>();
 		ArrayList<Video> videos = new ArrayList<>();
 		
