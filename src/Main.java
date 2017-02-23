@@ -14,14 +14,17 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		System.out.println("Hello world!");
+		
+		ArrayList<Endpoint> endpoints = new ArrayList<>();
+		ArrayList<Video> videos = new ArrayList<>();
+		
+		sortVideosForEachEndpoint(endpoints, videos);
 	}
 
 	
-	public Map<Endpoint, ArrayList<Video>> sortVideosForEachEndpoint(ArrayList<Endpoint> endpoints, ArrayList<Video> videos) {
+	public static Map<Endpoint, ArrayList<Video>> sortVideosForEachEndpoint(ArrayList<Endpoint> endpoints, ArrayList<Video> videos) {
 	  Map<Endpoint, ArrayList<Video>> endpointsToPopularVideos = new HashMap<Endpoint, ArrayList<Video>>();
 	  for (Endpoint endpoint: endpoints) {
-	    ArrayList<Video> sortedVideos = new ArrayList<Video>();
-	    
 	    ArrayList<Video> allVideos = null;
 	    
 	    
@@ -45,4 +48,5 @@ public class Main {
 	  }
 	  return endpointsToPopularVideos;
 	}
+
 }
