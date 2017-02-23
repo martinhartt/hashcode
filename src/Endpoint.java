@@ -2,6 +2,8 @@ import java.util.Map;
 
 public class Endpoint {
 
+	
+//	check commit
 	public Endpoint(int id, Map<Video, Integer> requestsForVideo) {
 		super();
 		this.id = id;
