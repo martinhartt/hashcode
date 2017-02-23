@@ -2,6 +2,12 @@ import java.util.Map;
 
 public class Endpoint {
 
+	public Endpoint(int id, Map<Video, Integer> requestsForVideo) {
+		super();
+		this.id = id;
+		this.requestsForVideo = requestsForVideo;
+	}
+
 	private int id;
 	public Map<Video, Integer> requestsForVideo;
 
