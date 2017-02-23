@@ -12,6 +12,8 @@ public class Input {
     static int totRequests;
     static int sizeOfCache;
 
+    static int endpointCounter;
+
     public Input() {
 
     }
@@ -38,27 +40,33 @@ public class Input {
 
         String[] allLines = everything.split("\\n");
 
-        String[] temp = allLines[0].split("\\s+");
-        totVideos = Integer.parseInt(temp[0]);
-        totEndpoins = Integer.parseInt(temp[1]);
-        totRequests = Integer.parseInt(temp[2]);
-        totCaches = Integer.parseInt(temp[3]);
-        sizeOfCache = Integer.parseInt(temp[4]);
+        String[] initialLine = allLines[0].split("\\s+");
+        totVideos = Integer.parseInt(initialLine[0]);
+        totEndpoins = Integer.parseInt(initialLine[1]);
+        totRequests = Integer.parseInt(initialLine[2]);
+        totCaches = Integer.parseInt(initialLine[3]);
+        sizeOfCache = Integer.parseInt(initialLine[4]);
 
         String[] allVideos = allLines[1].split("\\s+");
+        endpointCounter = 0;
 
-        String[] endpoints = allLines[2].split("\\s+");
+        int counter = 3;
+        for (int j = 0; j < totEndpoins ; j++) {
 
-        int noOfCaches = Integer.parseInt(endpoints[1]);
+            String[] endpoints = allLines[2].split("\\s+");
+            Endpoint e = new Endpoint(endpointCounter);
+            endpointCounter++;
 
-        for (int i = 0; i < noOfCaches; i++) {
+            e.setDataCenterLatency(Integer.parseInt(endpoints[0]));
+            int noOfCaches = Integer.parseInt(endpoints[1]); // fixed position
 
-            String[] cacheLatency = allLines[i + 3].split("\\s+");
+            for (int i = 0; i < noOfCaches; i++) {
 
-            Cache c = new Cache(Integer.parseInt(cacheLatency[0]), sizeOfCache, null);
+                String[] cacheLatency = allLines[i + 3].split("\\s+");
+                Cache c = new Cache(Integer.parseInt(cacheLatency[0]), sizeOfCache);
+            }
 
         }
-
 
 
 

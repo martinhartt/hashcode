@@ -12,6 +12,13 @@ public class Cache {
 		this.latencyForEndpoints = latencyForEndpoints;
 	}
 
+	public Cache(int id, int size) {
+		super();
+		this.id = id;
+		this.size = size;
+	}
+
+
 	public Map<Endpoint, Integer> getLatencyForEndpoints() {
 		return latencyForEndpoints;
 	}

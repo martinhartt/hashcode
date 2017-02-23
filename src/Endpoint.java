@@ -9,6 +9,11 @@ public class Endpoint {
 		this.requestsForVideo = requestsForVideo;
 	}
 
+	public Endpoint(int id){
+		super();
+		this.id = id;
+	}
+
 	private int id;
 	private Map<Video, Integer> requestsForVideo;
 	private Map<Cache, Integer> latenciesForCache;
