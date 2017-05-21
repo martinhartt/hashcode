@@ -1,9 +1,11 @@
+import java.util.ArrayList;
 import java.util.Map;
 
 public class Cache {
 	private int id;
 	private int size;
 	private Map<Endpoint, Integer> latencyForEndpoints;
+    private ArrayList<Video> chosenVideos;
 
 	public Cache(int id, int size, Map<Endpoint, Integer> latencyForEndpoints) {
 		super();
@@ -26,4 +28,16 @@ public class Cache {
 	public void setLatencyForEndpoints(Map<Endpoint, Integer> latencyForEndpoints) {
 		this.latencyForEndpoints = latencyForEndpoints;
 	}
+
+    public ArrayList<Video> getChosenVideos() {
+        return chosenVideos;
+    }
+
+    public void setChosenVideos(ArrayList<Video> chosenVideos) {
+        this.chosenVideos = chosenVideos;
+    }
+
+    public int getSize() {
+        return size;
+    }
 }

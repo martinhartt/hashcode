@@ -1,7 +1,11 @@
 import com.sun.xml.internal.ws.util.StringUtils;
 import sun.misc.IOUtils;
+import sun.misc.Regexp;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Input {
 
@@ -12,6 +16,11 @@ public class Input {
     static int totRequests;
     static int sizeOfCache;
 
+    public ArrayList<Video> Xvideos = new ArrayList<>();
+    public ArrayList<Cache> Xcaches = new ArrayList<>();
+    public ArrayList<Endpoint> Xendpoints = new ArrayList<>();
+
+
     static int endpointCounter;
 
     public Input() {
@@ -19,6 +28,12 @@ public class Input {
     }
 
     public static void main(String args[]) {
+
+
+
+    }
+
+    public void doStuff() {
 
         try(BufferedReader br = new BufferedReader(new FileReader("me_at_the_zoo.in"))) {
             StringBuilder sb = new StringBuilder();
@@ -36,6 +51,7 @@ public class Input {
             e.printStackTrace();
         }
 
+
         //System.out.println(everything);
 
         String[] allLines = everything.split("\\n");
@@ -48,14 +64,28 @@ public class Input {
         sizeOfCache = Integer.parseInt(initialLine[4]);
 
         String[] allVideos = allLines[1].split("\\s+");
-        endpointCounter = 0;
+        int[] allVideoSizes = new int[allVideos.length];
+        for (int i = 0; i < allVideos.length; i++) {
+            allVideoSizes[i] = Integer.parseInt(allVideos[i]);
+        }
 
-        int counter = 3;
+        for (int p = 0; p < totCaches; p++) {
+            Xcaches.add(new Cache(p, sizeOfCache, new HashMap<Endpoint, Integer>()));
+        }
+
+        for (int e = 0; e < totEndpoins; e++) {
+            Xendpoints.add(new Endpoint(e, new HashMap<>()));
+        }
+
+        for (int v = 0; v < totVideos; v++) {
+            Xvideos.add(new Video(v, allVideoSizes[v], null));
+        }
+        int counter = 2;
+
         for (int j = 0; j < totEndpoins ; j++) {
 
-            String[] endpoints = allLines[2].split("\\s+");
-            Endpoint e = new Endpoint(endpointCounter);
-            endpointCounter++;
+            String[] endpoints = allLines[counter].split("\\s+");
+            Endpoint e = Xendpoints.get(j);
 
             e.setDataCenterLatency(Integer.parseInt(endpoints[0]));
             int noOfCaches = Integer.parseInt(endpoints[1]); // fixed position
@@ -63,9 +93,42 @@ public class Input {
             for (int i = 0; i < noOfCaches; i++) {
 
                 String[] cacheLatency = allLines[i + 3].split("\\s+");
-                Cache c = new Cache(Integer.parseInt(cacheLatency[0]), sizeOfCache);
+
+                int id = Integer.parseInt(cacheLatency[0]);
+                int lat = Integer.parseInt(cacheLatency[1]);
+
+                if (id >= Xcaches.size()) {
+                    break;
+                }
+                counter++;
+
+                Xcaches.get(id).getLatencyForEndpoints().put(e, lat);
+
             }
 
+        }
+
+
+        int newCounter = 0;
+
+
+
+        for (int k = 0; k < totRequests; k++) {
+            String[] requestInfo = allLines[counter].split("\\s+");
+
+            counter++;
+
+            if (requestInfo == null || requestInfo.length < 3) {
+                continue;
+            }
+            System.out.println("HELLO");
+
+            int video = Integer.parseInt(requestInfo[0]);
+            int endpoint = Integer.parseInt(requestInfo[1]);
+            int requests = Integer.parseInt(requestInfo[2]);
+
+            Video v = Xvideos.get(video);
+            Xendpoints.get(endpoint).getRequestsForVideo().put(v, requests);
         }
 
 

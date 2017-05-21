@@ -11,6 +11,7 @@ public class Video {
 
 	private int size;
 	private int id;
+	private int rank = 0;
 
 	public int getSize() {
 		return size;
@@ -26,4 +27,12 @@ public class Video {
 	}
 
 	public Map<Endpoint, Integer> requestsForEndpoint;
+
+	public int getRank() {
+		return rank;
+	}
+
+	public void setRank(int rank) {
+		this.rank = rank;
+	}
 }
